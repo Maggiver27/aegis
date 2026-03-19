@@ -1,4 +1,4 @@
-# Active Scope ó AEGIS
+# Active Scope ù AEGIS
 Version: 1.0
 Date: 2026-03-19
 Authority: AEGIS v9.0
@@ -9,7 +9,7 @@ Authority: AEGIS v9.0
 - Stage: MSC
 
 ## Current Active Step
-- MSC-1 Core Runtime
+- MSC-2 Core Configuration Loader
 
 ## Composition Root Location
 `app/core/composition/composition_root.py`
@@ -18,10 +18,12 @@ All dependency wiring for MSC components must be centralized through this file.
 No module may create cross-component runtime dependencies outside this location unless explicitly approved.
 
 ## In Scope
-- Only code, tests, and minimal supporting files required for MSC-1 Core Runtime
+- Only code, tests, and minimal supporting files required for MSC-2 Core Configuration Loader
+- YAML runtime profile loading for the canonical profile:
+  `config/profiles/laptop.runtime.yaml`
 
 ## Out of Scope
-- MSC-2 and later
+- MSC-3 and later
 - Trading
 - Development
 - Plugins
@@ -30,8 +32,7 @@ No module may create cross-component runtime dependencies outside this location 
 - Device Control
 - External providers
 - UI beyond what MSC-1 strictly requires
-- YAML-based configuration loading
-- Core Configuration Loader responsibilities
+- UI beyond what MSC-2 strictly requires
 
 ## Advancement Condition
 This step may move forward only when:
@@ -45,4 +46,4 @@ No forward scaffolding.
 No speculative architecture.
 No mixing Action Bus and Event Bus semantics.
 No scattered dependency wiring.
-MSC-1 must not depend on YAML runtime profile loading.
+YAML runtime profile loading is allowed only for MSC-2 and must use `config/profiles/laptop.runtime.yaml`.

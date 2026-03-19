@@ -6,7 +6,7 @@ Authority: AEGIS v9.0
 | MSC Step | Component | Status | Reviewed | Passed | Signed Off | Notes |
 |---|---|---|---|---|---|---|
 | MSC-1 | Core Runtime | Generated | Yes | Yes | Yes | |
-| MSC-2 | Core Configuration Loader | Not Started | No | No | No | |
+| MSC-2 | Core Configuration Loader | Not Started | No | No | No | Canonical YAML profile: `config/profiles/laptop.runtime.yaml` |
 | MSC-3 | Core Logging / Audit Foundation | Not Started | No | No | No | |
 | MSC-4 | Capability Registry | Not Started | No | No | No | |
 | MSC-5 | Action Bus | Not Started | No | No | No | |

@@ -9,10 +9,12 @@ All generation must obey the active scope and current MSC step.
 
 ## Current Scope
 - Active phase: MSC
-- Active step: MSC-1 Core Runtime
+- Active step: MSC-2 Core Configuration Loader
 - Only generate or modify code required for the current active MSC step.
 - Do not generate future MSC steps early.
 - Do not generate Trading, Development, plugins, Memory, Knowledge, Device Control, or other later-stage modules.
+- YAML runtime profile loading is in scope only for MSC-2 using:
+  `config/profiles/laptop.runtime.yaml`
 
 ## Hard Build-Order Rule
 MSC components must be built only in this order:
