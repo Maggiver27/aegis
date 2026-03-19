@@ -1,0 +1,6 @@
+pyproject.toml
+mcgiver_ai.egg-info/PKG-INFO
+mcgiver_ai.egg-info/SOURCES.txt
+mcgiver_ai.egg-info/dependency_links.txt
+mcgiver_ai.egg-info/requires.txt
+mcgiver_ai.egg-info/top_level.txt

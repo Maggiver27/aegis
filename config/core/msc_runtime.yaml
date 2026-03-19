@@ -1,0 +1,14 @@
+runtime:
+  name: AEGIS
+  mode: msc
+  version: msc-step-2
+
+interface:
+  name: ARIX
+
+logging:
+  level: INFO
+
+features:
+  modules_enabled: false
+  legacy_enabled: false

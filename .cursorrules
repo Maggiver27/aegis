@@ -1,0 +1,107 @@
+# AEGIS Cursor Rules — MSC Enforcement
+Version: 1.1
+Date: 2026-03-19
+Authority: AEGIS v9.0
+
+## Authority
+This repository is governed by locked AEGIS v9.0 and the active roadmap authority.
+All generation must obey the active scope and current MSC step.
+
+## Current Scope
+- Active phase: MSC
+- Active step: MSC-1 Core Runtime
+- Only generate or modify code required for the current active MSC step.
+- Do not generate future MSC steps early.
+- Do not generate Trading, Development, plugins, Memory, Knowledge, Device Control, or other later-stage modules.
+
+## Hard Build-Order Rule
+MSC components must be built only in this order:
+1. Core Runtime
+2. Core Configuration Loader
+3. Core Logging/Audit Foundation
+4. Capability Registry
+5. Action Bus
+6. Event Bus / Event Layer
+7. Global Rules & Validation Layer
+8. Permissions Skeleton
+9. Monitoring & Diagnostics Skeleton
+10. Agent / Workflow Skeleton
+11. Conversation Entry Layer
+
+Never skip forward.
+Never scaffold later items "for convenience."
+Never mix multiple MSC steps in one generation unless explicitly authorized.
+
+## Governance Laws
+
+### Law 1 — Separation Law
+Respect layer boundaries:
+- Interfaces
+- Core
+- Domain Modules
+- Integrations
+- Storage / Infrastructure
+
+Do not mix responsibilities across layers.
+
+### Law 2 — Control Law
+All intentional execution must follow:
+Capability Registry ? Validation ? Permissions ? Action Bus ? Handler
+
+Do not create direct execution shortcuts.
+Do not allow modules to bypass this path.
+
+### Law 3 — Boundary Law
+Each module must remain within its functional scope.
+Do not absorb neighboring responsibilities.
+
+### Law 4 — Evolution Law
+System growth must follow:
+MSC ? Trading ? Development
+
+Do not introduce later-stage concerns during MSC unless explicitly required by the current step.
+
+## Action Bus / Event Bus Red Line
+- Action Bus is for intentional execution: "do this now"
+- Event Bus is for state-change notifications: "something happened"
+
+Never use Event Bus to perform intentional execution.
+Never use Action Bus as a general event publication channel.
+Never blur or unify these roles.
+
+## Composition Root Rule
+- Dependency wiring is Core-owned and centralized.
+- Do not scatter object creation across modules.
+- Do not instantiate dependencies inside domain logic unless explicitly approved.
+- The Composition Root path for current governance use is:
+  `app/core/composition/composition_root.py`
+
+## Generation Constraints
+- Work only on the current step.
+- Prefer minimal complete implementation over speculative scaffolding.
+- Do not add convenience abstractions not required by the current step.
+- Do not add provider-specific logic unless the current step explicitly requires it.
+- Do not create hidden future hooks for later stages unless explicitly requested.
+
+## Ledger Gate Rule
+Before planning or implementation:
+1. Read `docs/governance/msc_ledger.md`
+2. Confirm the current step is allowed
+   Note: MSC-1 has no prior step requirement and may always proceed.
+3. Confirm no forward step is started early
+4. If the gate is not satisfied, stop and report the violation
+
+## Testing Constraints
+- Generate only the tests required for the current step.
+- Tests must validate current-step responsibilities only.
+- Do not claim completion without explicit review and sign-off.
+
+## Output Discipline
+For every generated change:
+1. State the current MSC step
+2. State what files are changed
+3. State why each file is required for this step
+4. State any assumptions
+5. State what was intentionally not touched
+
+If a request conflicts with the locked build order or governance laws, refuse the conflicting part and explain why.

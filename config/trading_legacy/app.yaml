@@ -1,0 +1,8 @@
+app:
+  name: Mcgiver AI Assistant
+  version: 0.1.0
+  environment: dev
+
+server:
+  host: 127.0.0.1
+  port: 8000
