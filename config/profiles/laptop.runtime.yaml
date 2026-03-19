@@ -1,0 +1,6 @@
+runtime:
+  name: mcgiver-ai-core
+  version: "1.0"
+
+interface:
+  name: ARIX

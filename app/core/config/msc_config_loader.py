@@ -1,9 +1,18 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 import yaml
+
+
+@dataclass(frozen=True, slots=True)
+class RuntimeConfig:
+    name: str
+    version: str
+    interface_name: str
+    profile_path: Path
 
 
 class MSCConfigLoader:
@@ -22,7 +31,7 @@ class MSCConfigLoader:
     - no orchestration
     """
 
-    def __init__(self, config_path: str | Path) -> None:
+    def __init__(self, config_path: str | Path = "config/profiles/laptop.runtime.yaml") -> None:
         self._config_path = Path(config_path)
 
     @property
@@ -32,7 +41,11 @@ class MSCConfigLoader:
     def exists(self) -> bool:
         return self._config_path.exists() and self._config_path.is_file()
 
-    def load(self) -> dict[str, Any]:
+    def load(self) -> RuntimeConfig:
+        data = self._read_yaml_mapping()
+        return self._to_runtime_config(data)
+
+    def _read_yaml_mapping(self) -> dict[str, Any]:
         if not self._config_path.exists():
             raise FileNotFoundError(
                 f"MSC config file not found: {self._config_path}"
@@ -44,7 +57,7 @@ class MSCConfigLoader:
             )
 
         with self._config_path.open("r", encoding="utf-8") as file:
-            data = yaml.safe_load(file) or {}
+            data = yaml.safe_load(file)
 
         if not isinstance(data, dict):
             raise ValueError(
@@ -52,3 +65,30 @@ class MSCConfigLoader:
             )
 
         return data
+
+    def _to_runtime_config(self, data: Mapping[str, Any]) -> RuntimeConfig:
+        runtime = data.get("runtime")
+        interface = data.get("interface")
+
+        if not isinstance(runtime, dict):
+            raise ValueError("MSC config requires a 'runtime' mapping")
+        if not isinstance(interface, dict):
+            raise ValueError("MSC config requires an 'interface' mapping")
+
+        name = runtime.get("name")
+        version = runtime.get("version")
+        interface_name = interface.get("name")
+
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError("MSC config requires runtime.name as a non-empty string")
+        if not isinstance(version, str) or not version.strip():
+            raise ValueError("MSC config requires runtime.version as a non-empty string")
+        if not isinstance(interface_name, str) or not interface_name.strip():
+            raise ValueError("MSC config requires interface.name as a non-empty string")
+
+        return RuntimeConfig(
+            name=name.strip(),
+            version=version.strip(),
+            interface_name=interface_name.strip(),
+            profile_path=self._config_path,
+        )
