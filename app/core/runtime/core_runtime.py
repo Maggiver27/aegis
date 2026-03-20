@@ -5,6 +5,8 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Any
 
+from app.core.logging import LogLevel, Logger
+
 
 class RuntimeStatus(str, Enum):
     CREATED = "created"
@@ -29,12 +31,14 @@ class CoreRuntime:
     def __init__(
         self,
         name: str = "mcgiver-ai-core",
+        logger: Logger | None = None,
     ) -> None:
         self._name = name
         self._status = RuntimeStatus.CREATED
         self._started_at: datetime | None = None
         self._stopped_at: datetime | None = None
         self._metadata: dict[str, Any] = {}
+        self._logger = logger or Logger()
 
     @property
     def name(self) -> str:
@@ -52,6 +56,14 @@ class CoreRuntime:
         self._started_at = datetime.now(timezone.utc)
         self._stopped_at = None
         self._status = RuntimeStatus.RUNNING
+        self._logger.log(
+            LogLevel.INFO,
+            "Core runtime started",
+            metadata={
+                "runtime_name": self._name,
+                "status": self._status.value,
+            },
+        )
 
     def stop(self) -> None:
         if self._status == RuntimeStatus.STOPPED:
@@ -60,6 +72,14 @@ class CoreRuntime:
         self._status = RuntimeStatus.STOPPING
         self._stopped_at = datetime.now(timezone.utc)
         self._status = RuntimeStatus.STOPPED
+        self._logger.log(
+            LogLevel.INFO,
+            "Core runtime stopped",
+            metadata={
+                "runtime_name": self._name,
+                "status": self._status.value,
+            },
+        )
 
     def set_metadata(self, key: str, value: Any) -> None:
         self._metadata[key] = value

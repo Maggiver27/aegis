@@ -1,4 +1,4 @@
-# AEGIS Cursor Rules ó MSC Enforcement
+# AEGIS Cursor Rules ù MSC Enforcement
 Version: 1.1
 Date: 2026-03-19
 Authority: AEGIS v9.0
@@ -8,13 +8,9 @@ This repository is governed by locked AEGIS v9.0 and the active roadmap authorit
 All generation must obey the active scope and current MSC step.
 
 ## Current Scope
-- Active phase: MSC
-- Active step: MSC-2 Core Configuration Loader
-- Only generate or modify code required for the current active MSC step.
-- Do not generate future MSC steps early.
-- Do not generate Trading, Development, plugins, Memory, Knowledge, Device Control, or other later-stage modules.
-- YAML runtime profile loading is in scope only for MSC-2 using:
-  `config/profiles/laptop.runtime.yaml`
+The active MSC step and scope MUST be read from:
+docs/governance/active_scope.md
+Do not infer, duplicate, or override active step from any other file.
 
 ## Hard Build-Order Rule
 MSC components must be built only in this order:
@@ -36,7 +32,7 @@ Never mix multiple MSC steps in one generation unless explicitly authorized.
 
 ## Governance Laws
 
-### Law 1 ó Separation Law
+### Law 1 ù Separation Law
 Respect layer boundaries:
 - Interfaces
 - Core
@@ -46,18 +42,18 @@ Respect layer boundaries:
 
 Do not mix responsibilities across layers.
 
-### Law 2 ó Control Law
+### Law 2 ù Control Law
 All intentional execution must follow:
 Capability Registry ? Validation ? Permissions ? Action Bus ? Handler
 
 Do not create direct execution shortcuts.
 Do not allow modules to bypass this path.
 
-### Law 3 ó Boundary Law
+### Law 3 ù Boundary Law
 Each module must remain within its functional scope.
 Do not absorb neighboring responsibilities.
 
-### Law 4 ó Evolution Law
+### Law 4 ù Evolution Law
 System growth must follow:
 MSC ? Trading ? Development
 

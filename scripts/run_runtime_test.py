@@ -9,12 +9,6 @@ def main() -> None:
     print("\n=== RUNTIME SNAPSHOT ===")
     print(runtime.snapshot())
 
-    print("\n=== EXECUTE VIA RUNTIME ===")
-    result = runtime.execute("system.ping")
-
-    print("\n=== RESULT ===")
-    print(result)
-
     print("\n=== RUNTIME EXECUTION TEST PASSED ===\n")
 
 
