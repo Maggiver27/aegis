@@ -9,11 +9,12 @@ Authority: AEGIS v9.0
 - Stage: MSC
 
 ## Current Active Step
-- MSC-3 Core Logging/Audit Foundation
+- MSC-4 Capability Registry
 
 ## Transition State
 - MSC-2: Core Configuration Loader is completed
-- MSC-3 Core Logging/Audit Foundation is now active
+- MSC-3 Core Logging / Audit Foundation is completed
+- MSC-4 Capability Registry is now active
 
 ## Composition Root Location
 `app/core/composition/composition_root.py`
@@ -22,18 +23,18 @@ All dependency wiring for MSC components must be centralized through this file.
 No module may create cross-component runtime dependencies outside this location unless explicitly approved.
 
 ## In Scope
-- Only code, tests, and minimal supporting files required for MSC-3 Core Logging/Audit Foundation
+- Only code, tests, and minimal supporting files required for MSC-4 Capability Registry
 
 ## Out of Scope
-- MSC-4 and later
+- MSC-5 and later
 - Trading
 - Development
 - Plugins
 - Memory / Knowledge
-- Advanced monitoring beyond MSC-3 foundation scope
+- Advanced monitoring beyond MSC-4 registry scope
 - Device Control
 - External providers
-- UI beyond what MSC-3 strictly requires
+- UI beyond what MSC-4 strictly requires
 
 ## Advancement Condition
 This step may move forward only when:
